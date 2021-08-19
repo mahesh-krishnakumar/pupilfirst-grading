@@ -1,13 +1,17 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: "Pupilfirst Grading"
+description: "Grade a submission in Pupilfirst LMS"
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  pass_grade: # id of input
+    description: "Grade to pass"
     required: true
-    default: '1000'
+    default: "2"
+  fail_grade: # id of input
+    description: "Grade to fail"
+    required: true
+    default: "1"
 outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  response: # output will be available to future steps
+    description: "Response from the LMS"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
