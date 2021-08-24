@@ -1,21 +1,28 @@
-const core = require('@actions/core');
-const wait = require('./wait');
+const GraphQLClient = require("graphql-request").GraphQLClient;
+const gql = require("graphql-request").gql;
 
+const query = gql`
+  {
+    courses {
+      nodes {
+        id
+      }
+    }
+  }
+`;
+
+const endpoint = "https://www.pupilfirst.school/graphql";
+
+const graphQLClient = new GraphQLClient(endpoint, {
+  headers: {
+    authorization: `Bearer ${process.env.REVIEW_BOT_USER_TOKEN}`,
+  },
+});
 
 // most @actions toolkit packages have async methods
 async function run() {
-  try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
-  } catch (error) {
-    core.setFailed(error.message);
-  }
+  const data = await graphQLClient.request(query);
+  console.log(JSON.stringify(data, undefined, 2));
 }
 
 run();
