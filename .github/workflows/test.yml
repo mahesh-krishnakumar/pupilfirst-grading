@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REVIEW_BOT_USER_TOKEN: ${{ secrets.REVIEW_BOT_USER_TOKEN }}
+      EVALUATION_CRITERION_ID: ${{ secrets.EVALUATION_CRITERION_ID }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./
