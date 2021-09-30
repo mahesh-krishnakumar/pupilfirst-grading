@@ -1,15 +1,6 @@
 name: "Pupilfirst Grading"
 description: "Grade a submission in Pupilfirst LMS"
 inputs:
-  pass_grade: #
-    description: "Grade to pass"
-    required: true
-  fail_grade: # id of input
-    description: "Grade to fail"
-    required: true
-  evaluation_criteria:
-    description: Evaluation criteria IDs of the target
-    required: true
   pass_feedback:
     description: Student feedback on pass
   fail_feedback:
