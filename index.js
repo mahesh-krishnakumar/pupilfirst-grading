@@ -1,3 +1,5 @@
+const core = require("@actions/core");
+
 const GraphQLClient = require("graphql-request").GraphQLClient;
 const gql = require("graphql-request").gql;
 
@@ -37,18 +39,21 @@ const mutation = gql`
   }
 `;
 
+const submissionData = core.getInput("submission_data");
+
+const passed = core.getInput("passed");
+
+const grades = submissionData.target.evaluationCriteria.map((ec) => {
+  const ecGrade = {};
+  ecGrade["evaluationCriterionId"] = ec.id;
+  ecGrade["grade"] = passed ? ec.passGrade : ec.passGrade - 1;
+});
+
 const variables = {
-  submissionId: "246279",
-  grades: [{ evaluationCriterionId: "2695", grade: 2 }],
-  checklist: [
-    {
-      kind: "shortText",
-      title: "Describe your submission",
-      result: "This is something awesome",
-      status: "noAnswer",
-    },
-  ],
-  feedback: "Thats great job",
+  submissionId: submissionData.id,
+  grades: grades,
+  checklist: submissionData.checklist,
+  feedback: core.getInput("pass_feedback"),
 };
 
 // most @actions toolkit packages have async methods
