@@ -6921,7 +6921,7 @@ const mutation = gql`
   }
 `;
 
-const submissionData = core.getInput("submission_data");
+const submissionData = JSON.parse(core.getInput("submission_data"));
 
 const passed = core.getBooleanInput("passed");
 
