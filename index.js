@@ -13,7 +13,7 @@ const query = gql`
   }
 `;
 
-const endpoint = "https://vta-test-school-7146.pflms.net/graphql";
+const endpoint = process.env.REVIEW_BOT_USER_TOKEN;
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
