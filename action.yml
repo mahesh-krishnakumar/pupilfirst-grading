@@ -15,5 +15,5 @@ outputs:
   response: # output will be available to future steps
     description: "Response from the LMS"
 runs:
-  using: "node14"
+  using: "node12"
   main: "dist/index.js"
