@@ -13,7 +13,7 @@ const query = gql`
   }
 `;
 
-const endpoint = process.env.REVIEW_BOT_USER_TOKEN;
+const endpoint = process.env.REVIEW_END_POINT;
 
 const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
