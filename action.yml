@@ -9,6 +9,8 @@ inputs:
     description: Fields related to submission in JSON format
   passed:
     description: Status of tests on the submission
+  test_mode:
+    description: set to true for debugging
 outputs:
   response: # output will be available to future steps
     description: "Response from the LMS"

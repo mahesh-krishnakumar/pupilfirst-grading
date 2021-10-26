@@ -62,4 +62,10 @@ async function run() {
   console.log(JSON.stringify(data, undefined, 2));
 }
 
-run().catch((error) => console.log(error));
+let testMode = core.getBooleanInput("test_mode");
+
+if (testMode) {
+  console.log(submissionData);
+} else {
+  run().catch((error) => console.log(error));
+}
