@@ -6719,6 +6719,14 @@ exports.debug = debug; // for test
 
 /***/ }),
 
+/***/ 1788:
+/***/ ((module) => {
+
+module.exports = eval("require")("./submission.json");
+
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -6921,7 +6929,7 @@ const mutation = gql`
   }
 `;
 
-const submissionData = core.getInput("submission_data");
+const submissionData = __nccwpck_require__(1788);
 
 const passed = core.getInput("passed");
 

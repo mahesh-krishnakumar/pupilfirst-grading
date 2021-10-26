@@ -39,7 +39,7 @@ const mutation = gql`
   }
 `;
 
-const submissionData = core.getInput("submission_data");
+const submissionData = require("./submission.json");
 
 const passed = core.getInput("passed");
 
