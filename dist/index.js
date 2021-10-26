@@ -6927,7 +6927,7 @@ const passed = core.getBooleanInput("passed");
 
 console.log(submissionData);
 
-const grades = submissionData.target.evaluation_criteria.map((ec) => {
+const grades = submissionData["target"]["evaluation_criteria"].map((ec) => {
   const ecGrade = {};
   ecGrade["evaluationCriterionId"] = ec.id;
   ecGrade["grade"] = passed ? ec.passGrade : ec.passGrade - 1;
