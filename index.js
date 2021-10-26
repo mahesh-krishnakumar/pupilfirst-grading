@@ -39,9 +39,9 @@ const mutation = gql`
   }
 `;
 
-const submissionData = require("./submission.json");
+const submissionData = core.getInput("submission_data");
 
-const passed = core.getInput("passed");
+const passed = core.getBooleanInput("passed");
 
 const grades = submissionData.target.evaluationCriteria.map((ec) => {
   const ecGrade = {};
@@ -63,7 +63,6 @@ async function run() {
 }
 
 let testMode = core.getBooleanInput("test_mode");
-
 if (testMode) {
   console.log(submissionData);
 } else {

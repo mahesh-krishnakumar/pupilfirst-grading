@@ -6719,14 +6719,6 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 1788:
-/***/ ((module) => {
-
-module.exports = eval("require")("./submission.json");
-
-
-/***/ }),
-
 /***/ 2877:
 /***/ ((module) => {
 
@@ -6929,9 +6921,9 @@ const mutation = gql`
   }
 `;
 
-const submissionData = __nccwpck_require__(1788);
+const submissionData = core.getInput("submission_data");
 
-const passed = core.getInput("passed");
+const passed = core.getBooleanInput("passed");
 
 const grades = submissionData.target.evaluationCriteria.map((ec) => {
   const ecGrade = {};
@@ -6953,7 +6945,6 @@ async function run() {
 }
 
 let testMode = core.getBooleanInput("test_mode");
-
 if (testMode) {
   console.log(submissionData);
 } else {
