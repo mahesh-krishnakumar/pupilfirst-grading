@@ -7,10 +7,8 @@ inputs:
     description: Student feedback on fail
   submission_data:
     description: Fields related to submission in JSON format
-    required: true
   passed:
     description: Status of tests on the submission
-    required: true
 outputs:
   response: # output will be available to future steps
     description: "Response from the LMS"
