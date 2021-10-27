@@ -6923,8 +6923,10 @@ const mutation = gql`
   }
 `;
 
-const submissionData = fs.readFileSync(
-  path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
+const submissionData = JSON.parse(
+  fs.readFileSync(
+    path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
+  )
 );
 
 const reportData = JSON.parse(core.getInput("report_data"));
