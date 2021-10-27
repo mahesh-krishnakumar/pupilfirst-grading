@@ -6881,6 +6881,8 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(2186);
+const fs = __nccwpck_require__(5747);
+const path = __nccwpck_require__(5622);
 
 const GraphQLClient = __nccwpck_require__(2476).GraphQLClient;
 const gql = __nccwpck_require__(2476).gql;
@@ -6921,7 +6923,9 @@ const mutation = gql`
   }
 `;
 
-const submissionData = JSON.parse(core.getInput("submission_data"));
+const submissionData = fs.readFileSync(
+  path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
+);
 
 const reportData = JSON.parse(core.getInput("report_data"));
 

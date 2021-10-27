@@ -1,4 +1,6 @@
 const core = require("@actions/core");
+const fs = require("fs");
+const path = require("path");
 
 const GraphQLClient = require("graphql-request").GraphQLClient;
 const gql = require("graphql-request").gql;
@@ -39,7 +41,9 @@ const mutation = gql`
   }
 `;
 
-const submissionData = JSON.parse(core.getInput("submission_data"));
+const submissionData = fs.readFileSync(
+  path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
+);
 
 const reportData = JSON.parse(core.getInput("report_data"));
 
