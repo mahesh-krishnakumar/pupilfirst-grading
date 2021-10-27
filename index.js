@@ -41,9 +41,13 @@ const mutation = gql`
 
 const submissionData = JSON.parse(core.getInput("submission_data"));
 
+const reportData = JSON.parse(core.getInput("report_data"));
+
 const passed = core.getBooleanInput("passed");
 
 console.log(submissionData);
+
+console.log(core.getInput("translations"));
 
 const grades = submissionData["target"]["evaluation_criteria"].map((ec) => {
   const ecGrade = {};
@@ -67,6 +71,7 @@ async function run() {
 let testMode = core.getBooleanInput("test_mode");
 if (testMode) {
   console.log(submissionData);
+  console.log(reportData);
 } else {
   run().catch((error) => console.log(error));
 }

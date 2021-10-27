@@ -7,10 +7,14 @@ inputs:
     description: Student feedback on fail
   submission_data:
     description: Fields related to submission in JSON format
+  report_data:
+    description: Test results in JSON format
+  translations:
+    description: Translation of keys to feedback for report data
   passed:
     description: Status of tests on the submission
   test_mode:
-    description: set to true for debugging
+    description: Set to true for debugging
 outputs:
   response: # output will be available to future steps
     description: "Response from the LMS"
