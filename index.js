@@ -5,16 +5,6 @@ const path = require("path");
 const GraphQLClient = require("graphql-request").GraphQLClient;
 const gql = require("graphql-request").gql;
 
-const query = gql`
-  {
-    courses {
-      nodes {
-        id
-      }
-    }
-  }
-`;
-
 const endpoint = process.env.REVIEW_END_POINT;
 
 const graphQLClient = new GraphQLClient(endpoint, {
