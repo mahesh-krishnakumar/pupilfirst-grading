@@ -1,18 +1,10 @@
 name: "Pupilfirst Grading"
 description: "Grade a submission in Pupilfirst LMS"
 inputs:
-  pass_feedback:
-    description: Student feedback on pass
-  fail_feedback:
-    description: Student feedback on fail
   submission_data:
     description: Fields related to submission in JSON format
-  report_data:
-    description: Test results in JSON format
-  translations:
-    description: Translation of keys to feedback for report data
-  passed:
-    description: Status of tests on the submission
+  report_file_path:
+    description: Relative path of the report JSON file that holds the test data
   test_mode:
     description: Set to true for debugging
 outputs:

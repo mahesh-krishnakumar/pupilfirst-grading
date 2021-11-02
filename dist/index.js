@@ -6929,13 +6929,15 @@ const submissionData = JSON.parse(
   )
 );
 
-const reportData = JSON.parse(core.getInput("report_data"));
+const reportFilePath = core.getInput("report_path");
 
-const passed = core.getBooleanInput("passed");
+const reportData = JSON.parse(
+  fs.readFileSync(path.join(process.env.GITHUB_WORKSPACE, reportFilePath))
+);
 
-console.log(submissionData);
+const passed = reportData.status == "passed";
 
-console.log(core.getInput("translations"));
+const skip = reportData.grade == "skip";
 
 const grades = submissionData["target"]["evaluation_criteria"].map((ec) => {
   const ecGrade = {};
@@ -6947,16 +6949,21 @@ const variables = {
   submissionId: submissionData.id,
   grades: grades,
   checklist: submissionData.checklist,
-  feedback: core.getInput("pass_feedback"),
+  feedback: reportData.feedback,
 };
 
 // most @actions toolkit packages have async methods
 async function run() {
-  const data = await graphQLClient.request(mutation, variables);
-  console.log(JSON.stringify(data, undefined, 2));
+  if (!skip) {
+    const data = await graphQLClient.request(mutation, variables);
+    console.log(JSON.stringify(data, undefined, 2));
+  } else {
+    console.log("Skipped grading");
+  }
 }
 
 let testMode = core.getBooleanInput("test_mode");
+
 if (testMode) {
   console.log(submissionData);
   console.log(reportData);
