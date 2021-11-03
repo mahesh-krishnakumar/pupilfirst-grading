@@ -31,17 +31,33 @@ const mutation = gql`
   }
 `;
 
-const submissionData = JSON.parse(
-  fs.readFileSync(
-    path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
-  )
-);
+let submissionData;
 
-const reportFilePath = core.getInput("report_path");
+try {
+  submissionData = JSON.parse(
+    fs.readFileSync(
+      path.join(process.env.GITHUB_WORKSPACE, "submission_data.json")
+    )
+  );
+} catch (error) {
+  throw error;
+}
 
-const reportData = JSON.parse(
-  fs.readFileSync(path.join(process.env.GITHUB_WORKSPACE, reportFilePath))
-);
+const reportFilePath = core.getInput("report_file_path");
+
+let reportData;
+
+if (reportFilePath != undefined) {
+  try {
+    reportData = JSON.parse(
+      fs.readFileSync(path.join(process.env.GITHUB_WORKSPACE, reportFilePath))
+    );
+  } catch (error) {
+    throw error;
+  }
+} else {
+  throw "Report file path not provided";
+}
 
 const passed = reportData.status == "passed";
 
@@ -60,7 +76,6 @@ const variables = {
   feedback: reportData.feedback,
 };
 
-// most @actions toolkit packages have async methods
 async function run() {
   if (!skip) {
     const data = await graphQLClient.request(mutation, variables);

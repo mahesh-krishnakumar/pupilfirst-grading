@@ -1,8 +1,6 @@
 name: "Pupilfirst Grading"
 description: "Grade a submission in Pupilfirst LMS"
 inputs:
-  submission_data:
-    description: Fields related to submission in JSON format
   report_file_path:
     description: Relative path of the report JSON file that holds the test data
   test_mode:
